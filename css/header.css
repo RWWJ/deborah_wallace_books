@@ -1,0 +1,16 @@
+
+
+
+header {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+header h3 {
+  font-size: 1.8rem;
+  font-family: 'Jacques Francois Shadow', cursive;
+  color: var(--DarkestColor);
+  text-shadow: 2px 2px 2px var(--MediumColor);
+
+  margin: 0 auto; /* Center horizontally */
+}

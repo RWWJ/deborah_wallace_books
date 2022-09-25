@@ -1,0 +1,29 @@
+/*
+ *    free_book.css
+ */
+
+
+.FreeBook {
+  /* background-color: yellow; */
+  margin: 20px 0px;
+  width: 50%;
+}
+
+.FreeBook div {
+  /* background-color: red; */
+
+  text-align: center;
+}
+
+.FreeBook img {
+  display: block; /* So margin auto works */
+  width: 250px;
+
+  margin: 0px auto;
+}
+
+
+
+
+
+ /*  */

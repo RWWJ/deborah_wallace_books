@@ -1,0 +1,40 @@
+
+.PageNotFound_404 {
+  position: relative;
+  background: linear-gradient(-45deg, var(--NormalColor), var(--MediumColor));
+
+  width: 95%;
+  height: 95%;
+  margin: 0px auto;
+  /* padding: 10px 0px; */
+
+  box-shadow: 6px 6px 6px black, -3px -3px 3px gray;
+}
+.PageNotFound_404 div {
+  position: relative;
+  background: linear-gradient(135deg, var(--NormalColor), var(--MediumColor));
+
+  width: 90%;
+  height: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  color: Sienna;
+  text-shadow: 2px 2px black;
+  text-align: center;
+
+  box-shadow: 6px 6px 6px black, -3px -3px 3px gray;
+}
+.PageNotFound_404 h2 {
+  position: relative;
+
+  font-size: 3rem;
+
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+
+/*  */

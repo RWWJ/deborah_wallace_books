@@ -1,0 +1,85 @@
+/*
+ *    main.css
+ *
+ */
+
+html {
+  --DarkestColor: #8C5426;
+  --DarkColor: #dCa476;
+  --MediumColor: #ffd1a8; /* tan; */
+  --NormalColor: blanchedalmond;
+  --LightColor: beige;
+}
+
+
+body {
+  font-size: 16px;
+  font-family: 'Luxurious Roman', cursive;
+}
+
+
+.MainContent {
+  /* border: solid 2px blue; */
+  background-color: beige;
+
+  font-family: 'Sorts Mill Goudy', serif;
+  /* font-family: 'Luxurious Roman', cursive; */
+  font-size: 16px;
+}
+
+
+Button:hover, Button:focus {
+  opacity: .5;
+}
+Button {
+  background-color: var(--NormalColor);
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px gray;
+
+  cursor: pointer;
+
+  padding: 2px;
+}
+
+
+h1 {
+  font-size: 1.2rem;
+  color: var(--DarkestColor);
+
+  margin-top: 8px;
+}
+h1 sub {
+  position: relative;
+  top: -0.25rem;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+
+h2 {
+  font-size: 1.2rem;
+  color: var(--DarkestColor);
+
+  margin-top: 16px;
+}
+
+
+p {
+  margin-bottom: 0.5rem;  /* Seperate from next paragraph */
+}
+
+
+.HideContent {
+  display: none;
+}
+
+
+.Smiley {
+  /* color: orange; */
+  font-size: 26px;
+}
+
+
+
+
+/*  */

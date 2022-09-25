@@ -1,0 +1,27 @@
+
+/* fotter.css */
+
+
+footer a {
+  text-decoration: none;
+  color: black;
+}
+
+/* Footer content */
+#DeborahEMailID {
+  margin-right: 20px;
+}
+#CopyrightID {
+  margin-right: 20px;
+}
+#RayEMailID {
+  margin-right: 20px;
+}
+#VersionID {
+  font-size: 0.6rem;
+}
+
+
+
+
+/*  */

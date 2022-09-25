@@ -1,0 +1,34 @@
+
+
+.ContactForm {
+  position: relative;
+  max-width: 600px;
+
+  margin: 10px;
+  border: solid 2px var(--DarkColor);
+}
+
+
+.FormFieldBox {
+  padding: 5px;
+  background-color: rgb(255,255,255,0.3);
+  border: inset 4px var(--MediumColor);
+}
+
+
+.FormFieldBox label {
+  display: inline-block;
+  min-width: 100px;
+  text-decoration: underline;
+}
+
+
+.FormMessageBox textarea {
+  width: 100%;
+  height: 200px;
+}
+
+
+.FormButtonBox {
+  text-align: right;
+}

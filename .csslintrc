@@ -1,0 +1,19 @@
+{
+  "ignore": [
+    "order-alphabetical",
+    "ids",
+    "zero-units",
+    "qualified-headings",
+    "universal-selector",
+    "unqualified-attributes",
+    "box-sizing",
+    "box-model",
+    "import",
+    "fallback-colors",
+    "empty-rules"
+  ],
+  "warnings": [
+  ],
+  "errors": [
+  ]
+}

@@ -1,0 +1,86 @@
+
+/* Layout.css */
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  height: max-content;
+
+  background-color: var(--NormalColor);
+
+  display: grid; /* So .AllContent fills the height of the page/content */
+}
+
+.AllContent {
+  background-color: var(--LightColor) ;
+  position: relative;
+
+  width: 90%;
+  margin: 0px auto;  /* Center horizontally */
+
+  display: grid;
+  grid-template-columns: minmax(0px, 1024px);  /* Let horizontal re-size while maxing out at 1024px */
+  /* Header, nav, MainContent, footer */
+  grid-template-rows: max-content max-content 1fr max-content;
+}
+
+
+header {
+  text-align: center; /* Center text horizontally */
+}
+.Banner {
+  background-image: url("../Images/book_covers-Banner-2481x400-v2.jpg");
+  background-size: contain;
+  background-repeat: repeat-x;
+
+  height: 140px;
+}
+
+.Banner img {
+  float: left;
+  margin-left: 10px;
+
+  padding-top: 4px;
+}
+
+
+/* Menu <a> links (buttons) are under the <nav>  */
+nav {
+  /* NOTE: See content in menu.css */
+}
+
+
+.MainContent {
+
+}
+
+
+footer {
+  font-size: 0.75rem;
+  background-color: var(--DarkColor);
+  padding: 2px 15px;
+
+  margin-top: 10px;
+  margin-bottom: 5px;
+
+  display: grid;
+  /*                    DW  COPY  RW  ______ V */
+  grid-template-columns: 1fr 1fr max-content max-content max-content;
+}
+
+
+.Columns {
+  display: grid;
+  /* "auto-fit", create as many col's needed to fill the width of the container
+   * "minmax()", defines the col size.
+   * So, css will create as many columns as will fit in the container,
+   * growing them until it can fit one more 300px column in the container.
+   */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+
+
+
+/*  */

@@ -1,0 +1,45 @@
+Mailerlite landing page info.
+
+https://landing.mailerlite.com/webforms/landing/w6u8t4
+
+Insert the following snippet of JavaScript on every page of your website right before the closing </head> tag.
+
+Please note: You only need to add this snippet once, even if you plan to have a few different forms. There is no need to insert this JavaScript snippet if you already have it on your website.
+
+ 
+
+<!-- MailerLite Universal -->
+
+<script>
+
+(function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
+
+var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
+
+f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
+
+var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
+
+_.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
+
+ 
+
+var ml_account = ml('accounts', '2345279', 'm4n8n2f6e5', 'load');
+
+</script>
+
+<!-- End MailerLite Universal -->
+
+ 
+
+Copy and paste the code provided below, wherever you want the form to appear.
+
+ 
+
+<div class="ml-form-embed"
+
+  data-account="2345279:m4n8n2f6e5"
+
+  data-form="2597222:w6u8t4">
+
+</div>

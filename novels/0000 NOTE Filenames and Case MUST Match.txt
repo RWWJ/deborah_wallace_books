@@ -1,0 +1,7 @@
+
+0000 NOTE .txt and .jpg Filenames and Case MUST Match
+
+Except that, Blurb files can include "- Blurb" in their name.
+" - Blurb" gets striped when matching/creating the .jpg file name from the .txt file name
+
+

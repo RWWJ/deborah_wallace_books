@@ -1,0 +1,82 @@
+
+
+
+.BookList img {
+  height: 144px;  /* 128px; */
+  box-shadow: 3px 3px 2px gray;
+
+  margin-right: 6px;
+}
+
+
+.SeriesName {
+  background-color: var(--DarkColor);
+  display: none;
+
+  padding: 0px 8px;
+  margin-left: 6px;
+
+  border-radius: 6px;
+}
+.SeriesName.FirstOfSeries {
+  display: block;
+}
+.Columns .SeriesName {
+  display: block;
+}
+
+.Series {
+  margin-left: 25px;
+}
+/* Affects the "Available on Amazon" beside the book img */
+a.Series {
+  font-size: 0.75rem;
+}
+
+.BookName {
+  background-color: var(--MediumColor);
+
+  width: max-content;
+
+  padding: 0px 8px;
+  margin-bottom: 5px;
+
+  border-radius: 6px;
+}
+
+h1.SeriesName, h1.BookName {
+  color: black;
+}
+
+.Columns .BookName {
+  /* The max-content we use on the book tab/page, leaves us with an overhang in home tab/page columns */
+  width: auto;
+}
+
+/* Want wrapped lines to be closer */
+.Columns .BookName {
+  line-height: 50%;
+}
+/* Need ths so first line of warpped lines is still correct height */
+.Columns .BookName::first-line {
+  line-height: normal;
+}
+
+.Genre {
+  vertical-align: middle;
+  font-size: 0.75rem;
+  font-weight: 200;
+}
+
+
+.ColumnContent {
+  /* background-color: var(--NormalColor); */
+  box-shadow: 4px 4px 4px var(--DarkestColor),  -2px -2px 2px var(--DarkColor);
+  padding-right: 10px;
+  padding-top: 4px;
+}
+
+
+
+
+/*  */

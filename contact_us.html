@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">    <!-- w3.org says always specify a UTF-8 character encoding -->
+
+    <title>Contact Us - Deborah Wallace Books</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <!-- w3.org says always set the viewport like this -->
+
+    <meta name="author" content="Ray Wallace">
+    <meta name="description" content="Deborah's Books about Romance, Paranormal Romance and Romantic Suspense">
+    <meta name="keywords" content="romance, mystery, mysteries, paranormal, suspense, stories, novels, novelas, fiction, short stories, author, writer, new england, massachusetts">
+    <meta name="theme-color" content="#DEB887">	<!-- Any Browser can use this. Cell phones will use it in the title/menu bar -->
+
+    <link rel="icon" href="book-32x32.png">    <!-- Specify a favicon.ico (or .png) -->
+
+    <link rel="stylesheet" href="css/contact_form.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script defer src="libraries/files.js"></script>
+    <script defer src="libraries/helpers.js"></script>
+    <script defer src="javaScript/books.js"></script>
+    <script defer src="javaScript/main.js"></script>
+
+    <!-- Set by Javascript to be "Deborah[PageName]" -->
+    <title>Deborah []</title>
+  </head>
+
+  <body>
+
+    <div class="AllContent">
+      <header>
+        <h3 class="Header">Deborah Wallace</h3>
+        <div class="Banner">
+          <!-- <img> inserted by css -->
+        </div>
+      </header>
+
+      <nav>
+        <!-- Populate this section using Javascript -->
+        <a href="temp.html">HERE</a>
+      </nav>
+
+      <div class="MainContent">
+        <div class "ContactFormEnclosure ">
+          <!--
+                  FormSubmit.co
+            Free form submition, with form data EMailed to me (acutually I have this one set to go to Debby and cc: me).
+            Just set up the <form> method to POST and set it's action= to their web page and my EMail (or code from them).
+            NOTE: Don't forget to give names to all the fields!
+            NOTE: For this form I can now use dc10f08ade846f8d17a57a4e67f576a9 in place of Deborah's EMail address, to hide my EMail address.
+                  If I change the form, even using the same EMail address, I (Deborah in this case) get a validation request EMail
+           -->
+          <h1>Contact Us</h1>
+          <p>
+            Please use the form below to let us know if you have questions or comments and to be added to our mailing list.
+          </p>
+
+          <!-- NOTE: To change the email address, uncomment the <form with the email address, and comment out the other <form -->
+          <!-- <form action="https://formsubmit.co/HoudiniJr@GMail.com" method="POST" /> -->
+          <!-- <form action="https://formsubmit.co/Deborah@DeborahWallaceBooks.com" method="POST" /> -->
+          <form class="ContactForm" action="https://formsubmit.co/dc10f08ade846f8d17a57a4e67f576a9" method="POST" />
+            <div class="FormNameBox FormFieldBox">
+              <!-- <label>Your name: </label><input name="Person" type="text" placeholder="Name" required><br> -->
+              <label>Your name: </label><input name="name" type="text" placeholder="Name" required><br>
+            </div>
+            <div class="FormEmailBox FormFieldBox">
+              <!-- <label>Your EMail: </label><input name="EMail address" type="email"  placeholder="Name@gmail.com" required><br> -->
+              <label>Your EMail: </label><input name="email" type="email"  placeholder="Name@gmail.com" required><br>
+            </div>
+            <div class="FormMessageBox FormFieldBox">
+              <label>Message:</label>
+              <textarea name="Message" placeholder="Type your message here." required></textarea><br>
+            </div>
+            <!-- NOTE: Customize data for the form submition -->
+            <input type="hidden" name="_next" value="http://www.DeborahWallaceBooks/contact_thank_you.html">
+            <input type="hidden" name="_next" value="contact_thank_you.html">
+            <input type="hidden" name="_subject" value="Contact Form from DeborahWallaceBooks.com">
+            <input type="hidden" name="_cc" value="Ray@RipsPics.com">
+            <!-- formsubmit.co uses this _honey input field to help fool some spammers/scrapers Do NOT include a value="" field -->
+            <input type="text" name="_honey" style="display:none">
+            <!-- Change the format of the form contents in the EMail I get sent -->
+            <input type="hidden" name="_template" value="table">
+            <!-- Disable the captcha display page. Not recommended.
+                 It avoids some technical limitations which FormSubmit imposes from time to time. -->
+            <input type="hidden" name="_captcha" value="false">
+            <div class="FormButtonBox FormFieldBox">
+              <button type="submit">Send Message</button>
+            </div>
+          </form>
+
+        </div> <!-- END Contact form enclosure -->
+      </div>      <!-- END CONTENT -->
+
+      <footer>
+        <a id="DeborahEMailID" href="mailto:Deborah@DeborahWallaceBooks.com?subject=Deborah%20Wallace%20Books%20website">Deborah Wallace</a>
+        <span id="CopyrightID"> Copyright © <span id="CopyrightYearID"></span> Ray Wallace </span>
+        <a id="RayEMailID" href="mailto:Ray@RipsPics.com?subject=Deborah%20Wallace%20Books%20website">Ray@RipsPics.com</a>
+        <span id="VersionID">V0.0</span>
+      </footer>
+    </div> <!-- END "AllContent" -->
+
+
+  </body>
+</html>
+
+
+
+
+<!-- END HTML -->
+
+
+<!--  -->
