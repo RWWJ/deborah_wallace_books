@@ -3,7 +3,6 @@
 
 
 var BookListElement = document.querySelector(".BookList");
-// let BaseUrl = "../";
 
 //
 // Build a database of books as they are loaded
@@ -15,7 +14,7 @@ var BookListElement = document.querySelector(".BookList");
 //
 function displayNovels( novelListFile ) {
 //  let path = "../novels/";
-  let path = BaseUrl + "novels/";  // NOTE The ../ above was failing on github pages
+  let path = BaseUrl + "novels/";  // NOTE The ../novels/ above was failing on github pages
   let books = [];
   let nextBook = 0;
   let newNovels = [];
