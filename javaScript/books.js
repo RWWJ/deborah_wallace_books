@@ -92,7 +92,7 @@ function displayNovels( novelListFile ) {
 
           addBooksToDOM( books );
         }
-      } );  // END OF fileReadText( "./Novels/" + nextFile, ... )
+      } );  // END OF fileReadText( "./novels/" + nextFile, ... )
 
     } // END OF for( of fileList )
 
@@ -102,7 +102,7 @@ function displayNovels( novelListFile ) {
       books[0] = {series:"ERROR", number:0, title:novelListFile, amazon:"", image:"", tagline:"", genre:"", blurb:"COULD NOT READ FILE"};
       addBooksToDOM( books );
     }
-  } ); // END OF fileReadText( "Novels.txt", ... )
+  } ); // END OF fileReadText( "novels.txt", ... )
 }
 
 
@@ -150,7 +150,7 @@ function addBooksToDOM( books ) {
 
     // Amazon idString (i.e. B07X74WKS4)
     // AND cover image file
-    htmlContent += `<a class="${seriesClass}" target="_blank" href="https://www.amazon.com/dp/${books[nextBook].amazon}"> <img src="${'../Novels/'+books[nextBook].image}">Available on Amazon</a>\n`;
+    htmlContent += `<a class="${seriesClass}" target="_blank" href="https://www.amazon.com/dp/${books[nextBook].amazon}"> <img src="${'../novels/'+books[nextBook].image}">Available on Amazon</a>\n`;
 
     // Bold the tagline
     htmlContent += `<p class="${seriesClass}"><strong>${books[nextBook].tagline}</strong></p>\n`;
