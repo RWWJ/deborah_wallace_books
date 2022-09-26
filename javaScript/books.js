@@ -3,7 +3,7 @@
 
 
 var BookListElement = document.querySelector(".BookList");
-
+const BaseUrl = window.location;
 
 
 //
@@ -15,7 +15,8 @@ var BookListElement = document.querySelector(".BookList");
 // No need to wait for anything
 //
 function displayNovels( novelListFile ) {
-  let path = "../novels/";
+//  let path = "../novels/";
+  let path = BaseUrl + "/novels/";  // NOTE The ../ above was failing on github pages
   let books = [];
   let nextBook = 0;
   let newNovels = [];

@@ -29,7 +29,7 @@ header {
   text-align: center; /* Center text horizontally */
 }
 .Banner {
-  background-image: url("../images/book_covers-Banner-2481x400-v2.jpg");
+  background-image: url("../images/book_covers-banner-2481x400-v2.jpg");
   background-size: contain;
   background-repeat: repeat-x;
 
