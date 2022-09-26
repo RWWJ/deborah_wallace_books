@@ -3,8 +3,7 @@
 
 
 var BookListElement = document.querySelector(".BookList");
-const BaseUrl = window.location;
-
+// let BaseUrl = "../";
 
 //
 // Build a database of books as they are loaded
@@ -16,7 +15,7 @@ const BaseUrl = window.location;
 //
 function displayNovels( novelListFile ) {
 //  let path = "../novels/";
-  let path = BaseUrl + "/novels/";  // NOTE The ../ above was failing on github pages
+  let path = BaseUrl + "novels/";  // NOTE The ../ above was failing on github pages
   let books = [];
   let nextBook = 0;
   let newNovels = [];
@@ -151,8 +150,8 @@ function addBooksToDOM( books ) {
 
     // Amazon idString (i.e. B07X74WKS4)
     // AND cover image file
-    // NOTE The ../ was failing on github pages
-    let path = BaseUrl + "/novels/";
+    // NOTE The ../novels was failing on github pages
+    let path = BaseUrl + "novels/";
     // htmlContent += `<a class="${seriesClass}" target="_blank" href="https://www.amazon.com/dp/${books[nextBook].amazon}"> <img src="../novels/${+books[nextBook].image}">Available on Amazon</a>\n`;
     htmlContent += `<a class="${seriesClass}" target="_blank" href="https://www.amazon.com/dp/${books[nextBook].amazon}"> <img src="${BaseUrl}novels/${books[nextBook].image}">Available on Amazon</a>\n`;
 

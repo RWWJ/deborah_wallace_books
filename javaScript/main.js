@@ -16,6 +16,7 @@ const MenuEntries = [
 
 var ContentElement = document.querySelector(".MainContent");
 var ActivePage = "";
+let BaseUrl = "";
 
 
 addMenu( );
@@ -35,6 +36,8 @@ function addMenu( ) {
     // <a href="index.html" target="_self">Home</a>
     if( menu.url == pageUrl ) {
       ActivePage = menu.button;
+
+      BaseUrl = window.location.pathname.replace(menu.url, ""); // This is part of a fix for github pages not dealing with relative paths correctly
 
       // Include Selected class
       // NOTE: No menu for 404.html (File Not Found)
