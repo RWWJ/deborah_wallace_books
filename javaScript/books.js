@@ -151,7 +151,10 @@ function addBooksToDOM( books ) {
 
     // Amazon idString (i.e. B07X74WKS4)
     // AND cover image file
-    htmlContent += `<a class="${seriesClass}" target="_blank" href="https://www.amazon.com/dp/${books[nextBook].amazon}"> <img src="${'../novels/'+books[nextBook].image}">Available on Amazon</a>\n`;
+    // NOTE The ../ was failing on github pages
+    let path = BaseUrl + "/novels/";
+//    htmlContent += `<a class="${seriesClass}" target="_blank" href="https://www.amazon.com/dp/${books[nextBook].amazon}"> <img src="${'../novels/'+books[nextBook].image}">Available on Amazon</a>\n`;
+    htmlContent += `<a class="${seriesClass}" target="_blank" href="https://www.amazon.com/dp/${books[nextBook].amazon}"> <img src="${BaseUrl}novels/${books[nextBook].image}">Available on Amazon</a>\n`;
 
     // Bold the tagline
     htmlContent += `<p class="${seriesClass}"><strong>${books[nextBook].tagline}</strong></p>\n`;
