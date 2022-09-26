@@ -2,7 +2,7 @@
 nav a {
   display: inline-block; /* So we can set "button" width */
   text-decoration: none;
-  background-color: var(--NormalColor);
+  background-color: var(--MediumColor);
   border-radius: 4px;
   box-shadow: 2px 2px 2px gray;
   color: var(--DarkerColor);
@@ -11,7 +11,7 @@ nav a {
 
   min-width: 5rem;
   margin: 0px 10px;
-  padding: 2px;
+  padding: 2px 8px;
 
   text-align: center;
   text-shadow: 1px 1px 2px var(--DarkestColor);
@@ -23,5 +23,5 @@ nav a {
   decoration: none;
 }
 nav a.Selected {
-  background-color: var(--NormalColor);
+  background-color: var(--LightColor);
 }
