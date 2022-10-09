@@ -2,7 +2,7 @@
 // main.js
 
 
-const Version = "V3.09.22.2022"; // V.month.day.year
+const Version = "V3.10.09.2022"; // V.month.day.year
 const FirstYear = "2021";
 
 const MenuEntries = [
