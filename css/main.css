@@ -3,6 +3,8 @@
  *
  */
 
+
+
 html {
   --DarkestColor: #8C5426;
   --DarkColor: #dCa476;
@@ -10,11 +12,13 @@ html {
   --NormalColor: blanchedalmond;
   --LightColor: beige;
 }
-c
+
 
 body {
   font-size: 16px;
   font-family: 'Luxurious Roman', cursive;
+
+  border: 0px;
 }
 
 

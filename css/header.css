@@ -7,7 +7,7 @@ header {
 }
 
 header h3 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-family: 'Jacques Francois Shadow', cursive;
   color: var(--DarkestColor);
   text-shadow: 2px 2px 2px var(--MediumColor);

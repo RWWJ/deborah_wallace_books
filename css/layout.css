@@ -3,6 +3,7 @@
 
 body {
   width: 100vw;
+  max-width: 100%;  /* NOTE: Fixes horizontal scroll var being created JUST when there is a vertical scroll bar */
   min-height: 100vh;
   height: max-content;
 
@@ -15,7 +16,7 @@ body {
   background-color: var(--LightColor) ;
   position: relative;
 
-  width: 90%;
+  width: 95%;
   margin: 0px auto;  /* Center horizontally */
 
   display: grid;
@@ -33,7 +34,7 @@ header {
   background-size: contain;
   background-repeat: repeat-x;
 
-  height: 140px;
+  height: 100px;
 }
 
 .Banner img {
