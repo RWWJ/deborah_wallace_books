@@ -1,9 +1,16 @@
+# Ignore (do not commit to github), the file of environment variables (passwords etc..)
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
 
 # RWWJ
 StagingArea
 Staging
 staging
 stagingArea
+desktop.ini
 
 
 # Logs
@@ -13,6 +20,15 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+
+# Temp
+*.tmp
+*.bak
+
+# Dippy Windows files
+Thumbs.db
+# Need to escape the space in this filename
+Command\ Prompt
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -44,10 +60,6 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
-
-# Dependency directories
-node_modules/
-jspm_packages/
 
 # TypeScript v1 declaration files
 typings/

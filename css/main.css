@@ -6,6 +6,7 @@
 
 
 html {
+  /* Color variable definitions */
   --DarkestColor: #8C5426;
   --DarkColor: #dCa476;
   --MediumColor: #ffd1a8; /* tan; */

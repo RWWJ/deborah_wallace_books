@@ -57,6 +57,9 @@ nav {
 
 
 footer {
+  /* position: sticky;
+  bottom: 0px; */
+  
   font-size: 0.75rem;
   background-color: var(--DarkColor);
   padding: 2px 15px;
