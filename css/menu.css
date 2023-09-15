@@ -1,4 +1,10 @@
 
+nav {
+  position: sticky;
+  top: 0.0rem;
+  background-color: var(--LightColor);
+}
+
 nav a {
   display: inline-block; /* So we can set "button" width */
   text-decoration: none;
@@ -20,7 +26,7 @@ nav a:hover, nav a:focus {
   opacity: .5;
 }
 nav a {
-  decoration: none;
+  text-decoration: none;
 }
 nav a.Selected {
   background-color: var(--LightColor);
