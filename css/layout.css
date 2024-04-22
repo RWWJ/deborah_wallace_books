@@ -16,7 +16,7 @@ body {
   background-color: var(--LightColor) ;
   position: relative;
 
-  width: 95%;
+  /*width: 95%;        /* margin auto does NOT work with width 95% */
   margin: 0px auto;  /* Center horizontally */
 
   display: grid;
@@ -59,7 +59,7 @@ nav {
 footer {
   /* position: sticky;
   bottom: 0px; */
-  
+
   font-size: 0.75rem;
   background-color: var(--DarkColor);
   padding: 2px 15px;
