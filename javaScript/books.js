@@ -1,8 +1,43 @@
+//
+//     books.js
+//
+//
+// 22 Apr 2024  Fixed displayNovels() to not fail if blurb txt file is missing (failed to fetch text)
+//              v1.1
+//
 
-// books.js
+
+
+let BooksJsVersion = "1.1";
+
 
 
 var BookListElement = document.querySelector(".BookList");
+
+
+// // DEBUG
+// function verifyAscii( string ) {
+//   for( let index = 0; index < string.length; ++ index ) {
+//     let ascii = string.charCodeAt(index)
+//
+//     if( ascii > 128 || (ascii < 20 && ascii != "\n".charCodeAt(0)) ) {
+//       if( index < string.length-3 ) {
+//         let ascii_2 = string.charCodeAt(index+1)
+//         let ascii_3 = string.charCodeAt(index+2)
+//
+//         if( ascii == 239 && ascii_2 == 191 && ascii_3 == 189 ) {
+//           console.log( `Char ${index} thru ${index+2} should be '`)
+//
+//           index += 2
+//         }
+//         else console.log( `Char ${index} is ${ascii} of: ${string[index-2]}${string[index-1]}${string[index]}${string[index+1]}${string[index+2]}`)
+//       }
+//       else console.log( `Char ${index} is ${ascii} of: ${string[index-2]}${string[index-1]}${string[index]}${string[index+1]}${string[index+2]}`)
+//     }
+//   }
+// }
+
+
 
 //
 // Build a database of books as they are loaded
@@ -20,82 +55,91 @@ function displayNovels( novelListFile ) {
   let newNovels = [];
 
   newNovels = fileReadText( novelListFile, content => {
+    // Ensure we successfully read the file
     if( content.text ) {
-    let fileList = content.text.split("\n");
+      let fileList = content.text.split("\n");
 
-    for( let nextFile of fileList ) {
-      // Init books[] next entry with object defaults
-      books[nextBook] = {file:path+nextFile, series:"", number:0, title:"", amazon:"", image:"", tagline:"", genre:"", blurb:""};
-      // Default title, in case it is not specified (<title>) in the blurb file
-      books[nextBook].title = nextFile.replace( ".txt", ""  ).replace( / - [bB]lurb/, ""  );
-      // Use the temp title as the basis for the image filename
-      books[nextBook].image = books[nextBook].title + ".jpg";
+      for( let nextFile of fileList ) {
+        // Init books[] next entry with object defaults
+        books[nextBook] = {file:path+nextFile, series:"", number:0, title:"", amazon:"", image:"", tagline:"", genre:"", blurb:""};
+        // Default title, in case it is not specified (<title>) in the blurb file
+        books[nextBook].title = nextFile.replace( ".txt", ""  ).replace( / - [bB]lurb/, ""  );
+        // Use the temp title as the basis for the image filename
+        books[nextBook].image = books[nextBook].title + ".jpg";
 
-      ++nextBook;
+        ++nextBook;
 
-      fileReadText( path + nextFile, content => {
-        let lines = content.text.split("\n");
-        let nextLine = 0;
-        let bookNum;
-        let token;
-        let tokenEnd;
-        let value;
+        fileReadText( path + nextFile, content => {
+          let lines;
+          let nextLine = 0;
+          let bookNum;
+          let token;
+          let tokenEnd;
+          let value;
 
-        // Find the books[] entry for this file
-        for( bookNum = 0; bookNum < books.length && books[bookNum].file != content.fileName; ++bookNum ) {}
+          // Ensure we successfully read the file
+          if( content.text ) {
+            lines = content.text.split("\n");
 
-        // Make sure we found the books entry
-        if( bookNum < books.length ) {
-          // Eat blank lines
-          while( nextLine < lines.length && !lines[nextLine].trim() ) ++nextLine;
+// // DEBUG
+// verifyAscii( content.text )
 
-          // Process all the lines that start with "<" (<amzon>, <series>, etc...)
-          while( lines[nextLine].startsWith("<") && nextLine < lines.length ) {
-            tokenEnd = lines[nextLine].indexOf( ">" );
-            if( tokenEnd != -1 ) {
-              token = lines[nextLine].slice( 1, tokenEnd ).toLowerCase();
-              value = lines[nextLine].slice( tokenEnd+1 ).trim();
+            // Find the books[] entry for this file
+            for( bookNum = 0; bookNum < books.length && books[bookNum].file != content.fileName; ++bookNum ) {}
 
-              if( token == "amazon" ) books[bookNum].amazon = value;
-              else if( token == "series" ) books[bookNum].series = value;
-              else if( token == "number" ) books[bookNum].number = parseInt(value);
-              else if( token == "title" ) books[bookNum].title = value;
-              else if( token == "genre" ) books[bookNum].genre = value;
+            // Make sure we found the books entry
+            if( bookNum < books.length ) {
+              // Eat blank lines
+              while( nextLine < lines.length && !lines[nextLine].trim() ) ++nextLine;
+
+              // Process all the lines that start with "<" (<amzon>, <series>, etc...)
+              while( lines[nextLine].startsWith("<") && nextLine < lines.length ) {
+                tokenEnd = lines[nextLine].indexOf( ">" );
+                if( tokenEnd != -1 ) {
+                  token = lines[nextLine].slice( 1, tokenEnd ).toLowerCase();
+                  value = lines[nextLine].slice( tokenEnd+1 ).trim();
+
+                  if( token == "amazon" ) books[bookNum].amazon = value;
+                  else if( token == "series" ) books[bookNum].series = value;
+                  else if( token == "number" ) books[bookNum].number = parseInt(value);
+                  else if( token == "title" ) books[bookNum].title = value;
+                  else if( token == "genre" ) books[bookNum].genre = value;
+                }
+                ++nextLine;
+
+                // Eat blank lines
+                while( nextLine < lines.length && !lines[nextLine].trim() ) ++nextLine;
+              }
+
+              // Presume next line is a tagline
+              books[bookNum].tagline = lines[nextLine++].trim();
+
+              // Eat blank lines
+              while( nextLine < lines.length && !lines[nextLine].trim() ) ++nextLine;
+
+              // Collect all the blurb paragraphs
+              books[bookNum].blurb = [];
+
+              for( let nextPara = 0; nextLine < lines.length; ++nextPara ) {
+                books[bookNum].blurb[nextPara] = "";
+
+                // Grab the next paragraph (seperated by blank lines)
+                while( nextLine < lines.length && lines[nextLine].trim() ) {
+                  books[bookNum].blurb[nextPara] += lines[nextLine++] + "\n";
+                }
+                // Eat the blank line
+                if( nextLine < lines.length ) ++nextLine;
+              }
+
+
+              addBooksToDOM( books );
             }
-            ++nextLine;
-
-            // Eat blank lines
-            while( nextLine < lines.length && !lines[nextLine].trim() ) ++nextLine;
           }
+        } );  // END OF fileReadText( "./novels/" + nextFile, ... )
 
-          // Presume next line is a tagline
-          books[bookNum].tagline = lines[nextLine++].trim();
+      } // END OF for( of fileList )
 
-          // Eat blank lines
-          while( nextLine < lines.length && !lines[nextLine].trim() ) ++nextLine;
-
-          // Collect all the blurb paragraphs
-          books[bookNum].blurb = [];
-
-          for( let nextPara = 0; nextLine < lines.length; ++nextPara ) {
-            books[bookNum].blurb[nextPara] = "";
-
-            // Grab the next paragraph (seperated by blank lines)
-            while( nextLine < lines.length && lines[nextLine].trim() ) {
-              books[bookNum].blurb[nextPara] += lines[nextLine++] + "\n";
-            }
-            // Eat the blank line
-            if( nextLine < lines.length ) ++nextLine;
-          }
-
-
-          addBooksToDOM( books );
-        }
-      } );  // END OF fileReadText( "./novels/" + nextFile, ... )
-
-    } // END OF for( of fileList )
-
-    }
+    } // END if(content.text)
     else {
       // Display some error info
       books[0] = {series:"ERROR", number:0, title:novelListFile, amazon:"", image:"", tagline:"", genre:"", blurb:"COULD NOT READ FILE"};

@@ -1,9 +1,16 @@
+//
+//    main.js
+//
+//
+// 22 Apr 2024  V3.22.04.2024
+//
 
-// main.js
 
 
-const Version = "V3.10.09.2022"; // V.month.day.year
+const Version = "V3.22.04.2024";  // Last was "V3.10.09.2022"  // V.month.day.year
+
 const FirstYear = "2021";
+
 
 const MenuEntries = [
         {url:"index.html", button:"Home"},
