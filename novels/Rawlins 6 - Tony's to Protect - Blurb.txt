@@ -1,8 +1,8 @@
-﻿<series> Rawlins
+<series> Rawlins
 <amazon> B0C4BCWCSH
 <number> 6
 <title> Tony's To Protect
-<genre> Paranormal Romance – witches
+<genre> Paranormal Romance - witches
 
 When his instant family is targeted by evil, he'll use all his skills to keep them safe.
 
