@@ -9,8 +9,8 @@
 
 
 
-// V.month.day.year
-const Version = "V3.09.05.2024"; // Last was "V3.22.04.2024", previous "V3.10.09.2022"  // V.month.day.year
+// V#.month.day.year - Where # is the major version number
+const Version = "V3.09.05.2024"; // Last was "V3.22.04.2024", previous "V3.10.09.2022"  // V#.month.day.year
 
 const FirstYear = "2021";
 
