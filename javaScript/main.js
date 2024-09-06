@@ -3,12 +3,14 @@
 //
 //
 // 22 Apr 2024  Added code in setPageTitle() to make the Banner bigger on the first page
-//              V3.22.04.2024
+//              V3.22.04.2024 I used wrong date format for this version :-)
+//              V3.09.05.2024
 //
 
 
 
-const Version = "V3.22.04.2024";  // Last was "V3.10.09.2022"  // V.month.day.year
+// V.month.day.year
+const Version = "V3.09.05.2024"; // Last was "V3.22.04.2024", previous "V3.10.09.2022"  // V.month.day.year
 
 const FirstYear = "2021";
 
