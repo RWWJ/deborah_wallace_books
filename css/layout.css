@@ -22,9 +22,7 @@ body {
   display: grid;
   grid-template-columns: minmax(0px, 1024px);  /* Let horizontal re-size while maxing out at 1024px */
   /* Header, nav, MainContent, footer */
-/* DEBUG */
   grid-template-rows: max-content max-content 1fr max-content;
-  /* grid-template-rows: min-content max-content 1fr max-content; */
 }
 
 
