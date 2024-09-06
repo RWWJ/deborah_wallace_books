@@ -1,10 +1,5 @@
 
-
-
-header {
-  font-size: 40px;
-  font-weight: 600;
-}
+/* header.css */
 
 header h3 {
   font-size: 1.6rem;
@@ -12,5 +7,23 @@ header h3 {
   color: var(--DarkestColor);
   text-shadow: 2px 2px 2px var(--MediumColor);
 
-  margin: 0 auto; /* Center horizontally */
+  text-align: center; /* Center text horizontally */
 }
+
+
+.Banner {
+  background-image: url("../images/book_covers-banner-2481x400-v3.jpg");
+  background-size: contain;
+  background-repeat: repeat-x;
+
+  height: 100px;
+}
+.Banner.HomePage {
+  /* Debby want's the Home page (index.html) header bigger than other pages */
+  height: 150px;
+}
+
+
+
+
+/*  */

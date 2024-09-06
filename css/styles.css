@@ -6,17 +6,43 @@
 @import "menu.css";
 @import "footer.css";
 
-/* FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap');
-
 
 * {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
 }
+
+
+/* FONTS */
+/* NOTE: Loading fonts from google was sometimes slow, so move them localy to ../fonts */
+/* @import url('https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap'); */
+
+@font-face {
+  font-family: "Jacques Francois Shadow";
+  src: url("../fonts/JacquesFrancoisShadow-Regular.ttf");
+}
+@font-face {
+  font-family: "Luxurious Roman";
+  src: url("../fonts/LuxuriousRoman-Regular.ttf");
+}
+@font-face {
+  font-family: "Sorts Mill Goudy";
+  src: url("../fonts/SortsMillGoudy-Regular.ttf");
+}
+@font-face {
+  font-family: "Sorts Mill Goudy";
+  src: url("../fonts/SortsMillGoudy-Italic.ttf");
+}
+
+
+
+
+
+
+
 
 
 

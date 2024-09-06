@@ -22,26 +22,9 @@ body {
   display: grid;
   grid-template-columns: minmax(0px, 1024px);  /* Let horizontal re-size while maxing out at 1024px */
   /* Header, nav, MainContent, footer */
+/* DEBUG */
   grid-template-rows: max-content max-content 1fr max-content;
-}
-
-
-header {
-  text-align: center; /* Center text horizontally */
-}
-.Banner {
-  background-image: url("../images/book_covers-banner-2481x400-v3.jpg");
-  background-size: contain;
-  background-repeat: repeat-x;
-
-  height: 100px;
-}
-
-.Banner img {
-  float: left;
-  margin-left: 10px;
-
-  padding-top: 4px;
+  /* grid-template-rows: min-content max-content 1fr max-content; */
 }
 
 

@@ -62,8 +62,8 @@ function addMenu( ) {
 function setPageTitle( ) {
   document.querySelector( "title" ).innerText = `${ActivePage} - Deborah Wallace Books`;
 
-  // Debby wants the Banner bigger on the first page
-  if( ActivePage == "Home" ) document.querySelector(".Banner").style.height = "170px";
+  // Debby wants the Banner bigger on the Home page (index.html)
+  if( ActivePage == "Home" ) document.querySelector(".Banner").classList.add( "HomePage" );
 }
 
 
