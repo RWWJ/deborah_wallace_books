@@ -12,17 +12,15 @@ header h3 {
 
 
 .Banner {
-  background-image: url("../images/book_covers-banner-2481x400-v3.jpg");
-  background-size: contain;
-  background-repeat: repeat-x;
-
-  height: 100px;
+  overflow-x: hidden;
 }
-.Banner.HomePage {
+.Banner img {
+  height: 99px;
+}
+.Banner.HomePage img {
   /* Debby want's the Home page (index.html) header bigger than other pages */
-  height: 170px;
+  height: 165px;
 }
-
 
 
 
