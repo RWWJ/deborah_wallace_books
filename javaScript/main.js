@@ -5,12 +5,15 @@
 // 22 Apr 2024  Added code in setPageTitle() to make the Banner bigger on the first page
 //              V3.22.04.2024 I used wrong date format for this version :-)
 //              V3.09.05.2024
+// 12 Oct 2024  Major change in Header size and Banner img (no long background-image)
+//              fixes Header gap on cell phone
+//              V3.10.12.2024
 //
 
 
 
-// V#.month.day.year - Where # is the major version number
-const Version = "V3.09.05.2024"; // Last was "V3.22.04.2024", previous "V3.10.09.2022"  // V#.month.day.year
+// NOTE: V#.month.day.year - Where # is the major version number
+const Version = "V3.10.12.2024" /// Was "V3.09.05.2024";  // V#.month.day.year
 
 const FirstYear = "2021";
 
