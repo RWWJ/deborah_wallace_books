@@ -37,13 +37,24 @@
 //  10 Nov 2023  Added a few comments
 //               Changed fileReplaceExt() slightly to be the same as changeExtension() in helpers.js
 //               v1.17
-// 22 Apr 2024   Clean up code in fileReadText() and deal with stray (standalone) \r that show up in some text files.
+//  22 Apr 2024  Clean up code in fileReadText() and deal with stray (standalone) \r that show up in some text files.
 //               v1.18
-//
+//  30 Aug 2024  Added readEnv(), Env, and LocalFS
+//               v1.19
+//   4 Oct 2024  Added fileGetImageDataURL()
+//               v1.20
+//   5 Oct 2024  Improved status messages and error handling on a few fetch() calls
+//               Added a few missing revokeObjectURL() calls
+//               v1.21
+//  11 Oct 2024  Added encoding paramter to fileReadText( ). Defaults to UTF-8
+//               v1.22
+//  12 Dec 2024  Added getEncoding() and changed fileReadText() slightly to accomadate it
+//               Fixed multi-byte detection in getEncoding()
+//               v1.23
 
 
 
-var FilesJsVersion = "1.18";
+var FilesJsVersion = "1.23";  // NOTE: Do not change this variable name! It is used by readEnv() to see if files.js has been included by index.html
 
 
 //
@@ -56,21 +67,25 @@ var FilesJsVersion = "1.18";
 
 // Import all with this statement (NOTE: change the directory as appropriate)
 //import {fileReplaceExt, fileFileOfImageTextFiles, loadNextImage, fileFileOfTextFiles, fileReadText, fileReadTextPrompt, fileSaveBinary, fileSaveText, fileSaveLargeText,
-//        fileSaveJson, fileSaveCanvas, fileSaveLargeCanvas, fileExists, fileReadJson, fileReadJsonPrompt, fileNamePrompt, fileLoadImage, fileGetImageData, fileGetFileObj,
-//        removeLocalStorage, deleteLocalStorage, fromLocalStorage, toLocalStorage, clearLocalStorage, listLocalStorage }
+//        fileSaveJson, fileSaveCanvas, fileSaveLargeCanvas, fileExists, fileReadJson, fileReadJsonPrompt, fileNamePrompt, fileLoadImage, fileGetImageData, fileGetImageDataURL,
+//        fileGetFileObj, removeLocalStorage, deleteLocalStorage, fromLocalStorage, toLocalStorage, clearLocalStorage, listLocalStorage }
 //        from "../Javascript-Libraries/Files-Module.js";
 
 
 // export {fileReplaceExt, fileFileOfImageTextFiles, loadNextImage, fileFileOfTextFiles, fileReadText, fileReadTextPrompt, fileSaveBinary, fileSaveText, fileSaveLargeText,
-//         fileSaveJson, fileSaveCanvas, fileSaveLargeCanvas, fileExists, fileReadJson, fileReadJsonPrompt, fileNamePrompt, fileLoadImage, fileGetImageData, fileGetFileObj,
-//         removeLocalStorage, deleteLocalStorage, fromLocalStorage, toLocalStorage, clearLocalStorage, listLocalStorage };
+//         fileSaveJson, fileSaveCanvas, fileSaveLargeCanvas, fileExists, fileReadJson, fileReadJsonPrompt, fileNamePrompt, fileLoadImage, fileGetImageData, fileGetImageDataURL,
+//         fileGetFileObj, removeLocalStorage, deleteLocalStorage, fromLocalStorage, toLocalStorage, clearLocalStorage, listLocalStorage };
 
 
 
 //
 //   Properties
 //
-// LocalStoragePrefix                              // If defined, it is used as a prefix for toLocalStorage() and fromLocalStorage()
+// LocalStoragePrefix  // If defined, it is used as a prefix for toLocalStorage() and fromLocalStorage()
+// Env = {};           // readEnv() sets this from env.linux.json or env.win.json IF ether exists
+// LocalFS = true;     // readEnv() can change this to true if reading env.*.json file is successfull
+//
+
 
 //
 //   Methods
@@ -96,6 +111,7 @@ var FilesJsVersion = "1.18";
 // fileLoadImage( fileName, callback=null )
 // fileLoadImageCore( fileName, callback )
 // fileGetImageData( callback=null )
+// fileGetImageDataURL( url, callback=null )       // calls callback() with a dataURL of the image data of the specified url
 // fileGetFileObj( mimeType = "*.*", callback=null )  --- returns {fileName, file, src}
 //
 // removeLocalStorage( variableName )
@@ -106,9 +122,15 @@ var FilesJsVersion = "1.18";
 // --- jsonToLocalStorage(variable, variableName ) // Deprecated, use toLocalStorage()
 // clearLocalStorage( name )
 // listLocalStorage( )
+//
+// readEnv( callback = null )                      // Read environment variables form win.env.json or linux.env.json
+//
+
 
 
 let FileWaitingOnFiles = 0;
+var Env = {};           // readEnv() sets this from env.linux.json or env.win.json IF ether exists
+var LocalFS = true;     // readEnv() can change this to true if reading env.*.json file is successfull
 
 
 
@@ -228,6 +250,14 @@ function loadNextFile( next, fileList, callback ) {
 //
 // Takes either a url OR a fileName
 //
+// encoding is one of:
+//   UTF-8        (default)
+//   UTF-8 BOM    (same as UTF8)
+//   1252         (same as Windows-1252)
+//   Windows-1252
+//   8859-1       (same as Windows-1252)
+//   8859-15
+//
 function fileReadText( fileName, callback ) {
   let returnText = null;
 
@@ -242,17 +272,20 @@ function fileReadText( fileName, callback ) {
 
       if(response.ok) textStream = response.arrayBuffer(); // Can't use .text() when using TextDecoder in the .then() below
       else if(response.status==404)  console.log("WARNING: <"+fileName+"> not found. " + response.statusText);
-      else  console.log("ERROR: Could not open file or url: <"+fileName+">" + response.statusText);
+      else  console.error("ERROR: Could not open file or url: <"+fileName+">" + response.statusText);
 
       return textStream;  // null on error
     } )
     .then( text => {
+      let encoding = getEncoding( text )
+
       // Use TextDecoder to Deal with some funky characters (smart quotes etc..) cut/pasted from MS Word docs
       // Also standardize EOL (\n vs \r\n). Deal with stray (standalone) \r. Remove blank lines at file extremities.
-      let decoder = new TextDecoder("iso-8859-1");
-      if( text ) text = decoder.decode(text).replace(/\r\n/g,"\n").replace(/\r/g,"\n").trim();
+      let decoder = new TextDecoder("utf-8"); // This is Browser default, so we don't need TextDecoder or .arrayBuffer 12 lines up
+      if( encoding == "8859-1" || encoding == "windows-1252" || encoding == "1252" ) decoder = new TextDecoder( "windows-1252" )
+      else if( encoding == "8859-15" ) decoder = new TextDecoder( "iso-8859-15" )
 
-      returnText = text;
+      if( text ) returnText = decoder.decode(text).replace(/\r\n/g,"\n").replace(/\r/g,"\n").trim();
     } )
     .finally( () => {
       --FileWaitingOnFiles; // File operation no longer pending
@@ -281,7 +314,8 @@ function fileReadTextPrompt( callback=null ) {
 
   // Wait for onchange (i.e. User selected a file)
   inputFileElement.onchange = (event) => {
-    // NOTE Chrome seems to reuse it's event object, so we need to store .files[0].name for use inside fileReader.onload()
+    // NOTE Chrome reuses it's event object,
+    //      so we have to store .files[0].name to pass into callback()
     fileName = event.target.files[0].name;
 
     event.target.files[0].text( )  // Get a promise for the text
@@ -291,6 +325,50 @@ function fileReadTextPrompt( callback=null ) {
   };
 
   inputFileElement.click();  // Initiate the File dialog box
+}
+
+
+
+//
+// Pass in an ArrayBuffer
+//
+// Determine text encoding type of buffer contents (best guess based on sample of data)
+//
+// Per UTF-8 spec in wikipedia these (0x80 thru 0xBF) would all be "continuation byte" (i.e. byte 2, 3 or 4)
+//
+function getEncoding( buffer ) {
+  let UTF8_BOM = false
+  let multiByte = 0 // if byte & 0x80 then it is first byte of a multi byte char
+
+  data = new Uint8Array( buffer )  // Look at 8 bits at a time
+
+  // First byte of 0xEF (239) indicates Microsoft UTF-8 with BOM
+  // NOTE: I think the BOM (Byte Order Mark) is suppose to be FE FF (NOT EF) so you can tell the byte order
+  //       File is UTF-8 BOM if first three bytes are 0xEF(239) BB(187) BF(191)
+  if( data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF ) {
+    UTF8_BOM = true
+  }
+  else {
+    for( let index = 0; index < data.length; ++ index ) {
+      let byte = data[index]
+
+      // Test for multiple byte characters (i.e. UTF-8 encoding)
+      let numBytes
+      if( byte & 0x80 == 0x00 ) numBytes = 0
+      else if( byte & 0xE0 == 0xC0 ) numBytes = 1
+      else if( byte & 0xF0 == 0xE0 ) numBytes = 2
+      else if( byte & 0xF8 == 0xF0 ) numBytes = 3
+      if( index + numBytes < data.length ) {
+        let properMultibyte = numBytes
+        for( let next = 0; next < numBytes; ++next ) {
+          properMultibyte = properMultibyte && (data[index+next] & 0xC0 == 0x80)
+        }
+        if( properMultibyte ) ++multiByte
+      }
+    }
+  }
+
+  return (UTF8_BOM || multiByte) ? "UTF-8" : "1252"
 }
 
 
@@ -399,7 +477,7 @@ function fileSaveJson( defaultFileName, jsonObj ) {
 // NO indication of failure, success or canceling by user
 //
 // Accepts a default filename and a <canvas> element or a canvas context
-// NOTE: Will aslo work with a canvas class obj IF it has a .toDataURL() implementation
+// NOTE: Will also work with a canvas class obj IF it has a .toDataURL() implementation
 //
 function fileSaveCanvas( defaultFileName, canvas ) {
   let dataUrl;
@@ -479,7 +557,6 @@ function createImgElement( idSubtring ) {
 function fileExists( fileName, callback ) {
   let exists = false;  // Need to save the results for the .finally() clause, since it does NOT take parameters like .then() does
 
-  // fetch( fileName, {method:"HEAD", Cache-Control: no-store, headers:{Accept:"text/plain"}} )
   fetch( fileName, {method:"HEAD", cache:"no-store"} ) // Sets the "cache-control" http header
   .then( response => {
     let jsonStream = null;
@@ -515,8 +592,8 @@ function fileReadJson( fileName, callback ) {
       let jsonStream = null;
 
       if(response.ok) jsonStream = response.json(); // .status is in the range 200-299
-      else if(response.status==404)  console.log("WARNING: <"+fileName+"> not found. " + response.statusText);
-      else  console.log("ERROR: Could not open file or url: <"+fileName+">" + response.statusText);
+      else if( response.status == 404 )  console.log( `WARNING: file <${fileName}> not found: ${response.statusText}` );
+      else console.error( `ERROR: Could not open file: <${fileName}>: ${response.statusText}` );
 
       return jsonStream;
     } )
@@ -548,7 +625,8 @@ function fileReadJsonPrompt( callback=null ) {
 
   // Wait for onchange (i.e. User selected a file)
   inputFileElement.onchange = (event) => {
-    // NOTE Chrome seems to reuse it's event object, so we need to store .files[0].name for use inside fileReader.onload()
+    // NOTE Chrome reuses it's event object,
+    //      so we have to store .files[0].name to pass into callback()
     fileName = event.target.files[0].name;
 
     event.target.files[0].text( )  // Get a promise for the text
@@ -610,8 +688,8 @@ function fileLoadImage( fileName, callback=null ) {
       let objectURL = URL.createObjectURL( event.target.files[0] ); // Must be the whole file structure, not just fileName
 
       imageElement.onload = () => {
-        URL.revokeObjectURL( objectURL );  // The file blob can not be garbage collected until we break the association with objectURL
         if( callback ) callback( {fileName:fileName, element:imageElement, image:objectURL} );
+        URL.revokeObjectURL( objectURL );  // The file blob can not be garbage collected until we break the association with objectURL
       };
 
       imageElement.src = objectURL;  // Trigger file load
@@ -679,6 +757,7 @@ function fileGetImageData( callback=null ) {
 
     // Create a URL refernce to the file blob (just a refernce, it is not the actual data like a dataURL)
     imageElement.src = URL.createObjectURL( file ); // Make available incase caller want's to display the image as well as use the binary data
+    URL.revokeObjectURL( imageElement.src );
 
     fileReader.onload = event => {  // loadend event ( .onloadend ) happens whether successfull or not. load event (.onload) only for success
       if( callback ) callback( {fileName:fileName, image:event.target.result, element:imageElement} );
@@ -688,6 +767,32 @@ function fileGetImageData( callback=null ) {
   };
 
   inputFileElement.click();    // Initiate the File dialog box
+}
+
+
+
+//
+// calls callback() with a dataURL of the image data of the specified url
+//
+function fileGetImageDataURL( url, callback=null ) {
+  fetch( url )
+  .then( response => {
+    let blob = null
+
+    if( response.ok ) blob = response.blob()
+    else if( response.status == 404 )  console.log( `WARNING: file <${url}> not found: ${response.statusText}` );
+    else console.error( `ERROR: Could not open file: <${url}>: ${response.statusText}` );
+
+    return blob
+  } )
+  .then( blob => {
+    let fileReader = new FileReader( );
+
+    fileReader.onload = event => {  // loadend event happens successfull or not. load event happens only for success
+      if( callback ) callback( fileReader.result );
+    };
+    fileReader.readAsDataURL( blob );  // Trigger file read
+  } )
 }
 
 
@@ -713,6 +818,7 @@ function fileGetFileObj( mimeType = ".*", callback=null ) {
     let src = URL.createObjectURL( file ); // Make available incase caller want's to display the image as well as use the binary data
 
     if( callback ) callback( { fileName, file, src } );
+    URL.revokeObjectURL( src );
   };
 
   inputFileElement.click();    // Initiate the File dialog box
@@ -786,6 +892,41 @@ function listLocalStorage( ) {
   }
 
   return list;
+}
+
+
+
+//
+// Read environment variables form win.env.json or linux.env.json
+//
+//  NOTE:
+//       Presume we only need the Env if we are going to use fs.js and want the Env.cwd for it
+//       We need files.js also, so we can use fileExists()
+//
+//       Env.cwd is actually set to the project base directory, NOT the subdir that the .js may be running in
+//
+function readEnv( callback = null ) {
+  if( window.VersionFsJs && window.FilesJsVersion ) {
+    fileExists(  navigator.platform.includes("Win") ? "./env.win.json" : "./env.linux.json", exists => {
+      if( exists ) {
+        fileReadJson( navigator.platform.includes("Win") ? "./env.win.json" : "./env.linux.json", result => {
+          if( result.jsonObj ) {
+            Env = result.jsonObj;  // Useful for .cwd, .temp, .documents directories
+
+            LocalFS = !Env.cwd;
+          }
+          if( callback ) callback( true );
+        } )
+      }
+      else {
+        if( window.Dialog ) Dialog.Ok( "Run Install", {msgText:`Please run ${navigator.platform.includes("Win") ? "install.bat" : "install.sh"} from the project directory, then refresh the webpage`} );
+        else alert( `\t\tRUN INSTALL\n\nPlease run ${navigator.platform.includes("Win") ? "install.bat" : "install.sh"} from the project directory, then refresh the webpage.` );
+
+        if( callback ) callback( false );
+    }
+    } )
+  }
+  else   if( callback ) callback( false );
 }
 
 
