@@ -1,3 +1,4 @@
+Stillwater 1 - Returning Home - Blurb.txt
 Choice 1 - Second Choice - Blurb.txt
 Choice 2 - Third Choice - Blurb.txt
 Choice 3 - No Choice - Blurb.txt
@@ -10,6 +11,7 @@ Rawlins 5 - Kristy's Puzzle - Blurb.txt
 Rawlins 6 - Tony's to Protect - Blurb.txt
 Rawlins 7 - Abby's Salem Legacy - Blurb.txt
 Rawlins 8 - Keith's Return - Blurb.txt
+Rawlins 9 - Gabe's Atonement - Blurb.txt
 Unknown 1 - Father Unknown - Blurb.txt
 Unknown 2 - Killer Unknown - Blurb.txt
 Wounded Warrior Hearts 1 - Wounded Warrior Hearts - Steven - Blurb.txt
