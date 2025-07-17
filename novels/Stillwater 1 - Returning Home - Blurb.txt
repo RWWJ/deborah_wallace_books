@@ -4,8 +4,7 @@
 <title> Returning Home
 <genre> Romantic Suspense
 
-A life she can't remember.
-<b>A husband who's a stranger.</b>
+A life she can't remember. <br> A husband who's a stranger.
 
 <i><b>Again.</b></i>
  
